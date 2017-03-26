@@ -11,7 +11,7 @@ describe('TodoApp', () => {
     expect(TodoApp).toExist();
   });
 
-  it('should add todo to the todos state on handleAddTodo', () => {
+  /*it('should add todo to the todos state on handleAddTodo', () => {
     const todoText = 'test';
     const todoApp = TestUtils.renderIntoDocument(<TodoApp />);
 
@@ -33,5 +33,5 @@ describe('TodoApp', () => {
 
     todoApp.handleToggle(11);
     expect(todoApp.state.todos[0].completed).toBe(true);
-  });
+  });*/
 });
