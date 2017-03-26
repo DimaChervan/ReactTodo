@@ -1,15 +1,15 @@
 import React from 'react';
 import Todo from 'Todo';
 
-const renderTodos = (todos) => {
+const renderTodos = (todos, onToggle) => {
   return todos.map((todo) => {
-    return <Todo key={todo.id} {...todo} />
+    return <Todo key={todo.id} onToggle={onToggle} {...todo} />
   });
 };
 
-const TodoList = ({ todos }) => (
+const TodoList = ({ todos, onToggle }) => (
   <div>
-    {renderTodos(todos)}
+    {renderTodos(todos, onToggle)}
   </div>
 );
 
