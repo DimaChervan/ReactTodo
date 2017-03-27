@@ -18,6 +18,23 @@ module.exports = {
     }
 
     return todos || [];
+  },
+  filterTodos (todos, showCompleted, searchText) {
+    let filteredTodos = todos.filter(todo => {
+      return (!todo.completed || showCompleted) && !!~todo.text.toLowerCase().indexOf(searchText);
+    });
+
+    filteredTodos.sort((a, b) => {
+      if (!a.completed && b.completed) {
+        return -1;
+      } else if (a.completed && !b.completed) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    return filteredTodos;
   }
 };
 /*export const setTodos = (todos) => {
