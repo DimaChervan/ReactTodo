@@ -4,6 +4,7 @@ import AddTodo from 'AddTodo';
 import TodoSearch from 'TodoSearch';
 import uuid from 'node-uuid';
 import TodoAPI from 'TodoAPI';
+import moment from 'moment';
 
 class TodoApp extends React.Component {
   state = {
@@ -23,7 +24,9 @@ class TodoApp extends React.Component {
         {
           id: uuid(),
           text,
-          completed: false
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: null
         }
       ]
     });
@@ -40,6 +43,7 @@ class TodoApp extends React.Component {
     var updatedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
+        todo.completedAt = todo.completed ? moment().unix() : null;
       }
       return todo;
     });
