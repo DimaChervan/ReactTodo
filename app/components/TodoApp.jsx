@@ -10,7 +10,7 @@ class TodoApp extends React.Component {
   state = {
     showCompleted: false,
     searchText: '',
-      todos: TodoAPI.getTodos()
+    todos: TodoAPI.getTodos()
   }
 
   componentDidUpdate () {
