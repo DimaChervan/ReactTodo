@@ -1,20 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Todo from 'Todo';
 
-const renderTodos = (todos, onToggle) => {
+const renderTodos = (todos) => {
   if (todos.length === 0) {
     return <p className="container__message">Nothing To Do</p>
   }
 
   return todos.map((todo) => {
-    return <Todo key={todo.id} onToggle={onToggle} {...todo} />
+    return <Todo key={todo.id} {...todo} />
   });
 };
 
-const TodoList = ({ todos, onToggle }) => (
+export const TodoList = ({ todos }) => (
   <div>
-    {renderTodos(todos, onToggle)}
+    {renderTodos(todos)}
   </div>
 );
 
-export default TodoList;
+export default connect(
+  (state) => {
+    return {
+      todos: state.todos
+    };
+  }
+)(TodoList);

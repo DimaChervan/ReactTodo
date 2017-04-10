@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
+import * as actions from 'actions';
 
 const renderDate = (createdAt, completedAt) => {
   let message = 'Created ';
@@ -17,8 +19,8 @@ const getCls = (completed) => {
   return 'todo' + (completed ? ' todo-completed' : '');
 };
 
-const Todo = ({ id, text, completed, onToggle, createdAt, completedAt }) => (
-  <div className={getCls(completed)} onClick={() => onToggle(id)}>
+export const Todo = ({ id, text, completed, createdAt, completedAt, dispatch }) => (
+  <div className={getCls(completed)} onClick={() => dispatch(actions.toggleTodo(id))}>
     <div>
       <input type="checkbox" defaultChecked={completed} />
     </div>
@@ -29,4 +31,4 @@ const Todo = ({ id, text, completed, onToggle, createdAt, completedAt }) => (
   </div>
 );
 
-export default Todo;
+export default connect()(Todo);

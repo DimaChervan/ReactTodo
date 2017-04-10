@@ -1,37 +1,30 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import expect from 'expect';
 import $ from 'jQuery';
 import TestUtils from 'react-addons-test-utils';
 
+import { configure } from 'configureStore'
 import TodoApp from 'TodoApp';
+import TodoList from 'TodoList';
 
 describe('TodoApp', () => {
   it('should exist', () => {
     expect(TodoApp).toExist();
   });
 
-  /*it('should add todo to the todos state on handleAddTodo', () => {
-    const todoText = 'test';
-    const todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+  it('should render todo list', () => {
+    const store = configure();
+    const provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <TodoApp />
+      </Provider>
+    );
 
-    todoApp.setState({todos: []});
-    todoApp.handleAddTodo(todoText);
+    const todoApp = TestUtils.scryRenderedComponentsWithType(provider, TodoApp)[0];
+    const todoList = TestUtils.scryRenderedComponentsWithType(todoApp, TodoList);
 
-    expect(todoApp.state.todos[0].text).toBe(todoText);
+    expect(todoList.length).toEqual(1);
   });
-
-  it('should toggle completed value when handleToggle called', () => {
-    const todoData = {
-      id: 11,
-      text: 'test',
-      completed: false
-    };
-    const todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-    todoApp.setState({todos: [todoData]});
-    expect(todoApp.state.todos[0].completed).toBe(false);
-
-    todoApp.handleToggle(11);
-    expect(todoApp.state.todos[0].completed).toBe(true);
-  });*/
 });
